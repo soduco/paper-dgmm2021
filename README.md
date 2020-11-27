@@ -2,18 +2,26 @@
 Repository for the extra material of our paper submitted to DGMM 2021.
 
 ## Training and testing part of the historical maps
-![](images/input_crop_black_color.jpg)
+<span style="color: Red"> Red color</span>: Training set 
+
+<span style="color: green"> The green color</span>: Validation set 
+
+<span style="color: blue"> The blue color</span> : Testing set 
+
+![](input_crop_black_color.jpg)
 
 ## Precision and recall curves
-![](images/p_pre_post_ws.jpg)
-![](images/r_pre_post_ws.jpg)
+
+The precision and recall curve of different IoU with and without watershed.
+![](p_pre_post_ws.jpg)
+![](r_pre_post_ws.jpg)
 
 ## Precision and recall maps
-![precision map before watershed](images/precision_pre_watershed.jpg)
-![Precision map after watershed](images/precision_watershed.jpg)
 
-![Recall map before watershed](images/recall_pre_watershed.jpg)
-![Recall map after watershed](images/recall_watershed.jpg)
+<p>Precision image before watershed <img src="precision_pre_watershed.jpg" alt="foo bar" title="title" /></p>
+<p>Precision image after watershed <img src="precision_watershed.jpg" alt="foo bar" title="title" /></p>
+<p> Recall image before watershed <img src="recall_pre_watershed.jpg" alt="foo bar" title="title" /></p>
+<p>Recall image after watershed <img src="recall_watershed.jpg" alt="foo bar" title="title" /></p>
 
 ## Sensitivity test of different areas and dynamics
 ![](images/post_ws_7.jpg)

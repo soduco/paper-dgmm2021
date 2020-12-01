@@ -55,6 +55,7 @@ def test(model, args):
         fuse = Image.fromarray(fuse).convert('RGB')
         fuse.save(os.path.join(save_dir, 'fuse', '{}.png'.format(nm[i][0].split('/')[2].split('.')[0])))
         all_t += time.time() - tm
+    print('Save prediction into folder {}'.format(str(os.path.join(save_dir, 'fuse'))))
     print('Overall Time use: ', time.time() - start_time)
 
 def main():

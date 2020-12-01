@@ -1,0 +1,8 @@
+code/DGMM_release_code/2.BDCN/historical_map_data/test
+code/DGMM_release_code/2.BDCN/historical_map_data/test_partial
+code/DGMM_release_code/2.BDCN/historical_map_data/train
+code/DGMM_release_code/2.BDCN/historical_map_data/val
+code/DGMM_release_code/2.BDCN/historical_map_data/*.lst
+
+code/DGMM_release_code/2.BDCN/__pycache__/
+code/DGMM_release_code/2.BDCN/log.txt

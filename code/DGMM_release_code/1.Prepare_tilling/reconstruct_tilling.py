@@ -1,12 +1,12 @@
 import os
-import skio
+import skimage.io as skio
 import numpy as np
 from PIL import Image
 import argparse
 
 
 def reconstruct_tilling(original_image_path, tile_path, tile_save_path, w_size=500):
-    in_patches = os.lisdir(tile_path)
+    in_patches = os.listdir(tile_path)
     patches_paths = [os.path.join(tile_path, f) for f in in_patches]
 
     win_size = w_size
@@ -46,7 +46,7 @@ def reconstruct_from_patches(patches_paths, patch_size, step_size, image_size_2d
     print(f"patch_offset: {patch_offset}, patch_inner: {patch_inner}")
     
     for row in range(numrows):
-        print(f"Row {row}")
+        # print(f"Row {row}")
         for col in range(numcols):
             tt = skio.imread(patches_paths[row*numcols+col])
             tt_roi = tt[patch_offset:-patch_offset,patch_offset:-patch_offset]
@@ -65,7 +65,7 @@ def main():
     parser.add_argument('output_path', help='Path of saving output images.')
 
     args = parser.parse_args()
-    reconstruct_tilling(args.input_image_path, args.input_image_path, args.output_path)
+    reconstruct_tilling(args.input_image_path, args.input_tile_path, args.output_path)
 
 if __name__ == '__main__':
     main()

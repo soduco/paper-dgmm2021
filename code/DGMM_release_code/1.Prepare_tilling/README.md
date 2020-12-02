@@ -1,5 +1,5 @@
 # How to solve tilling issue in the prediction
-## Generate tilling
+## Generate tillings
 ```python
 python create_tilling.py <input_path> <output_path>
 ```

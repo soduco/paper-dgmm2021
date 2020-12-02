@@ -3,10 +3,6 @@
 # Activate the virtualenv
 source "/lrde/home2/ychen/hist_env_3.7/bin/activate"
 
-echo "----EPM boarder calibration----"
-
-python boarder_calibration.py ./data/contour_prob_tile_optimize.png ./data/input_mask_fix_epm.png ./data/contour_prob_tile_optimize_fix_boader.png
-
 echo "----EPM2labelmap----"
 
 parallel -j 10 python epm2labelmap.py ./data/contour_prob_tile_optimize_fix_boader.png ./data/epm_threshold/epm_label_map_{1}.png --threshold {1} ::: $(seq 0 1 10)

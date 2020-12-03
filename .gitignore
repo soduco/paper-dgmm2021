@@ -6,3 +6,5 @@ code/DGMM_release_code/2.BDCN/historical_map_data/*.lst
 
 code/DGMM_release_code/2.BDCN/__pycache__/
 code/DGMM_release_code/2.BDCN/log.txt
+.markdownlint.json
+

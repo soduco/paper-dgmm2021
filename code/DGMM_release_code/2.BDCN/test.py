@@ -21,7 +21,7 @@ def test(model, args):
     test_lst = cfg.config_test[args.dataset]['data_lst']
     test_name_lst = os.path.join(test_root, 'test.lst')
     mean_bgr = np.array(cfg.config_test[args.dataset]['mean_bgr'])
-    
+
     test_img = Data(test_root, test_lst, mean_bgr=mean_bgr)
     testloader = torch.utils.data.DataLoader(test_img, batch_size=1, shuffle=False, num_workers=1)
     nm = np.loadtxt(test_name_lst, dtype=str)
@@ -40,7 +40,7 @@ def test(model, args):
     for i, (data, _) in enumerate(testloader):
         if args.cuda:
             data = data.cuda()
-            data = Variable(data)
+        data = Variable(data)
         tm = time.time()
 
         with torch.no_grad():
@@ -66,7 +66,12 @@ def main():
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 
     model = bdcn.BDCN()
-    model.load_state_dict(torch.load('%s' % (args.model)))
+    if torch.cuda.is_available():
+        map_location=lambda storage, loc: storage.cuda()
+    else:
+        map_location='cpu'
+
+    model.load_state_dict(torch.load('%s' % (args.model), map_location=map_location))
     test(model, args)
 
 def parse_args():

@@ -105,4 +105,16 @@ ws.tiff: the resulting watershed tiff file
 out.png: the colorized watershed file
 
 # 9. Evaluate the results
-???
+Evaluate the watershed segmentations with ground truth segmentations.
+
+```shell script
+python ./4.Evaluation/eval_shape_detection.py <input_gt_path> <input_contenders_path> -m <input-mask> -o <output-dir>
+```
+
+input_gt_path: Path to the input label map (TIFF 16 bits) for ground truth.
+
+input_contenders_path: Path to the contenders label map (TIFF 16 bits) for predictions.
+
+input-mask: Path to an mask image (pixel with value 0 will be discarded in the evaluation).
+
+output-dir: Path to the output directory where results will be stored.

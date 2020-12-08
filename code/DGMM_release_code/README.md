@@ -23,14 +23,36 @@ unzip dgmm_dataset.zip
 That will download the dataset and extract it in the dgmm_dataset directory (inside the paper-dgmm2021 directory).
 
 # 2. Create image patches for the dgmm_dataset
+## Prepare the patches for training
+Since the size of whole image is too big as the input of the network, we require to divide the whole map image into batches.
 
+The batch images will save into folder *output_directory/image* and *output_directory/gt*
+
+```shell script
+python ./2.BDCN/historical_map_data/create_image_batches.py <map_image_input> <ground_truth_image_input> <output_directory>
+```
+
+## prepare the tilling patches
 Now, we will decompose the input image into tiles and put the resulting tiles in directory *2.BDCN/historical_map_data*.
+
 ```shell script
 python create_tiling.py ./dgmm_dataset/input/input_crop.jpg 2.BDCN/historical_map_data
 ```
 
 # 3. Decompose the dataset into train/test/val datasets
-???
+Once we get the image batches from the second step, we need to seperate the files for training, validating and testing.
+
+The generated *.lst* files:
+
+*train_pair.lst*: name of the files for training
+
+*val_pair.lst*: name of the files for validating
+
+*test_pari.lst*: name of the files for testing
+
+```shell script
+python ./2.BDCN/historical_map_data/prepare_training_text.py
+```
 
 # 4. Train
 

@@ -3,15 +3,15 @@ import cv2
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Boarder Calibration.')
+    parser = argparse.ArgumentParser(description='Border Calibration.')
     parser.add_argument('input_EPM_path', help='Path of edge probaiblity map.')
-    parser.add_argument('input_boarder_path', help='Path of boarder mask.')
-    parser.add_argument('output_path', help='Path of update boader image.')
+    parser.add_argument('input_border_path', help='Path of border mask.')
+    parser.add_argument('output_path', help='Path of update border image.')
 
     args = parser.parse_args()
 
     EPM = cv2.imread(args.input_EPM_path, cv2.IMREAD_GRAYSCALE)
-    BOD = cv2.imread(args.input_boarder_path, cv2.IMREAD_GRAYSCALE)
+    BOD = cv2.imread(args.input_border_path, cv2.IMREAD_GRAYSCALE)
 
     # for each pixel p(x,y) where value = 0 in the mask, you should set the
     # EPM pixel p(x,y) to 0 (sure no edge)

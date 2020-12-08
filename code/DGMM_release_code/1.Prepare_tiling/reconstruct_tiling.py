@@ -5,7 +5,7 @@ from PIL import Image
 import argparse
 
 
-def reconstruct_tilling(original_image_path, tile_path, tile_save_path, w_size=500):
+def reconstruct_tiling(original_image_path, tile_path, tile_save_path, w_size=500):
     in_patches = os.listdir(tile_path)
     in_patches.sort()
     patches_paths = [os.path.join(tile_path, f) for f in in_patches]
@@ -62,11 +62,11 @@ def reconstruct_from_patches(patches_paths, patch_size, step_size, image_size_2d
 def main():
     parser = argparse.ArgumentParser(description='Boarder Calibration.')
     parser.add_argument('input_image_path', help='Path of original images.')
-    parser.add_argument('input_tile_path', help='Path of tillings.')
+    parser.add_argument('input_tile_path', help='Path of tilings.')
     parser.add_argument('output_path', help='Path of saving output images.')
 
     args = parser.parse_args()
-    reconstruct_tilling(args.input_image_path, args.input_tile_path, args.output_path)
+    reconstruct_tiling(args.input_image_path, args.input_tile_path, args.output_path)
 
 if __name__ == '__main__':
     main()

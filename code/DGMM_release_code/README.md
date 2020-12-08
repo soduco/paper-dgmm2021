@@ -26,7 +26,7 @@ That will download the dataset and extract it in the dgmm_dataset directory (ins
 
 Now, we will decompose the input image into tiles and put the resulting tiles in directory *2.BDCN/historical_map_data*.
 ```shell script
-python create_tilling.py ./dgmm_dataset/input/input_crop.jpg 2.BDCN/historical_map_data
+python create_tiling.py ./dgmm_dataset/input/input_crop.jpg 2.BDCN/historical_map_data
 ```
 
 # 3. Decompose the dataset into train/test/val datasets
@@ -52,7 +52,7 @@ The resulting tiles are in the *test_results* directory.
 
 We just need to put everything back together with:
 ```shell script
-python 1.Prepare_tilling/reconstruct_tilling.py ./dgmm_dataset/input/input_crop.jpg ./test_results/bdcn_100_fuse-xxx/bdcn_100_fuse/fuse/ result_epm.jpg
+python 1.Prepare_tiling/reconstruct_tiling.py ./dgmm_dataset/input/input_crop.jpg ./test_results/bdcn_100_fuse-xxx/bdcn_100_fuse/fuse/ result_epm.jpg
 ```
 The EPM image is in *result_epm.jpg*.
 
@@ -60,7 +60,7 @@ The EPM image is in *result_epm.jpg*.
 
 We should also get rid of the parts of the image outside the map area.
 ```shell script
-python ../1.Prepare_tilling/boarder_calibration.py result_epm.jpg ./dgmm_dataset/input/input_mask.png result_epm_mask.jpg
+python ../1.Prepare_tiling/border_calibration.py result_epm.jpg ./dgmm_dataset/input/input_mask.png result_epm_mask.jpg
 ```
 The *result_epm_mask.jpg* contains now the final EPM image. Yay!
 

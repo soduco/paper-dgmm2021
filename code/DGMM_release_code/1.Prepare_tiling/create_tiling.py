@@ -6,8 +6,8 @@ import os
 from skimage.util import view_as_windows
 import argparse
 
-def generate_tilling(image_path, save_path, w_size=500):
-    # Generate tilling images
+def generate_tiling(image_path, save_path, w_size=500):
+    # Generate tiling images
     win_size = w_size
     pad_px = win_size // 2
 
@@ -34,10 +34,10 @@ def generate_tilling(image_path, save_path, w_size=500):
 def main():
     parser = argparse.ArgumentParser(description='Boarder Calibration.')
     parser.add_argument('input_path', help='Path of original image.')
-    parser.add_argument('output_path', help='Directory of saving the tillings.')
+    parser.add_argument('output_path', help='Directory of saving the tilings.')
 
     args = parser.parse_args()
-    generate_tilling(args.input_path, args.output_path)
+    generate_tiling(args.input_path, args.output_path)
 
 if __name__ == '__main__':
     main()

@@ -4,6 +4,15 @@ git clone https://github.com/soduco/paper-dgmm2021.git
 cd paper-dgmm2021
 ```
 You now have the code in directory paper-dgmm2021.
+At this point, you should probably create a virtual environment. For instance:
+```shell script
+python3 -m venv dgmm-env
+source ./dgmm-env/bin/activate
+```
+Now, install the dependencies (with pip).
+```shell script
+pip install -r requirements.txt
+```
 
 # 1. Get the dataset
 Download the dataset from the project releases or simply by using the following shell lines.

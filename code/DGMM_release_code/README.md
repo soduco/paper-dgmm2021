@@ -81,6 +81,7 @@ The EPM image is in *result_epm.jpg*.
 # 7. Extract data within border
 
 We should also get rid of the parts of the image outside the map area.
+
 ```shell script
 python ../1.Prepare_tiling/border_calibration.py result_epm.jpg ./dgmm_dataset/input/input_mask.png result_epm_mask.jpg
 ```
@@ -89,7 +90,9 @@ The *result_epm_mask.jpg* contains now the final EPM image. Yay!
 # 8. Run watershed segmentation
 Use watershed to create segmentations on the edge probability map (EPM).
 
-Usage: ./3.watershed/histmapseg/build/bin/histmapseg input.png dynamic area_closing ws.tiff out.png
+```shell script
+./3.watershed/histmapseg/build/bin/histmapseg input.png dynamic area_closing ws.tiff out.png
+```
 
 input.png: this should be the file of EPM
 

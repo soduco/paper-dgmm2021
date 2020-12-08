@@ -7,6 +7,7 @@ import argparse
 
 def reconstruct_tilling(original_image_path, tile_path, tile_save_path, w_size=500):
     in_patches = os.listdir(tile_path)
+    in_patches.sort()
     patches_paths = [os.path.join(tile_path, f) for f in in_patches]
 
     win_size = w_size
@@ -25,26 +26,26 @@ def reconstruct_from_patches(patches_paths, patch_size, step_size, image_size_2d
     step_size should be patch_size//2
     image_size_2d is the size of the original image
     image_dtype is the data type of the target image
-    
-    Most of this could be guessed using an array of patches 
+
+    Most of this could be guessed using an array of patches
     (except step_size but, again, it should be should be patch_size//2)
     '''
     i_h, i_w = np.array(image_size_2d[:2]) + (patch_size, patch_size)
     print(f"tmp img size: {i_h},{i_w}")
     p_h = p_w = patch_size
     img = np.zeros((i_h+p_h//2, i_w+p_w//2, 3), dtype=image_dtype)
-    
+
     numrows = (i_h)//step_size-1
     numcols = (i_w)//step_size-1
     expected_patches = numrows * numcols
     print(f"numrows: {numrows}, numcols: {numcols}, total expected patches: {expected_patches}")
     if len(patches_paths) != expected_patches:
         raise ValueError(f"Expected {expected_patches} patches, got {len(patches_paths)}")
-    
+
     patch_offset = step_size//2
     patch_inner = p_h-step_size
     print(f"patch_offset: {patch_offset}, patch_inner: {patch_inner}")
-    
+
     for row in range(numrows):
         # print(f"Row {row}")
         for col in range(numcols):

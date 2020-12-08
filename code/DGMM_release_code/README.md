@@ -87,7 +87,19 @@ python ../1.Prepare_tiling/border_calibration.py result_epm.jpg ./dgmm_dataset/i
 The *result_epm_mask.jpg* contains now the final EPM image. Yay!
 
 # 8. Run watershed segmentation
-???
+Use watershed to create segmentations on the edge probability map (EPM).
+
+Usage: ./3.watershed/histmapseg/build/bin/histmapseg input.png dynamic area_closing ws.tiff out.png
+
+input.png: this should be the file of EPM
+
+dynamic: the parameter of dynamic
+
+area_closing: the size for closing area
+
+ws.tiff: the resulting watershed tiff file
+
+out.png: the colorized watershed file
 
 # 9. Evaluate the results
 ???

@@ -1,10 +1,14 @@
-code/DGMM_release_code/2.BDCN/historical_map_data/test
-code/DGMM_release_code/2.BDCN/historical_map_data/test_partial
-code/DGMM_release_code/2.BDCN/historical_map_data/train
-code/DGMM_release_code/2.BDCN/historical_map_data/val
+code/DGMM_release_code/2.BDCN/historical_map_data/gt/
+code/DGMM_release_code/2.BDCN/historical_map_data/image/
+code/DGMM_release_code/2.BDCN/historical_map_data/test/
+code/DGMM_release_code/2.BDCN/historical_map_data/original_image/
 code/DGMM_release_code/2.BDCN/historical_map_data/*.lst
+code/DGMM_release_code/2.BDCN/historical_map_data/__pycache__
 
-code/DGMM_release_code/2.BDCN/__pycache__/
-code/DGMM_release_code/2.BDCN/log.txt
+code/DGMM_release_code/2.BDCN/__pycache__
+code/DGMM_release_code/2.BDCN/datasets/__pycache__
+
+.gitignore
+
 .markdownlint.json
 

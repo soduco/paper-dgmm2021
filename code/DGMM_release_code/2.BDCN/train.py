@@ -223,7 +223,7 @@ def parse_args():
         help='whether use gpu to train network')
     parser.add_argument('-g', '--gpu', type=str, default='0',
         help='the gpu id to train net')
-    parser.add_argument('--weight-decay', type=float, default=0.0002,
+    parser.add_argument('--weight-decay', type=float, default=0.002,
         help='the weight_decay of net')
     parser.add_argument('-r', '--resume', type=str, default=None,
         help='whether resume from some, default is None')

@@ -105,7 +105,7 @@ A linux build is provided but, if for some reason it doesn't work for you, you c
 cd ./3.watershed/histmapseg/
 mkdir newbuild && cd newbuild
 conan install .. --build missing -s compiler.libcxx=libstdc++11 -s compiler.cppstd=20 -g cmake
-cmake .. -DCMAKE_CXX_FLAGS=-no-pie -DCMAKE_BUILD_TYPE=Release
+cmake .. -DCMAKE_POSITION_INDEPENDENT_CODE=OFF -DCMAKE_BUILD_TYPE=Release
 cmake --build . --config Release
 ```
 Here you go: you now have your executable in *newbuild/bin/histmapseg*.

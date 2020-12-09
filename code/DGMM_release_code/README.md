@@ -1,7 +1,7 @@
 # 0. Get the code
 ```shell script
 git clone https://github.com/soduco/paper-dgmm2021.git
-cd paper-dgmm2021
+cd paper-dgmm2021/code/DGMM_release_code
 ```
 You now have the code in directory paper-dgmm2021.
 At this point, you should probably create a virtual environment. For instance:
@@ -29,7 +29,12 @@ Since the size of whole image is too big as the input of the network, we require
 The batch images will save into folder *output_directory/image* and *output_directory/gt*
 
 ```shell script
-python ./2.BDCN/historical_map_data/create_image_batches.py <map_image_input> <ground_truth_image_input> <output_directory>
+python ./2.BDCN/historical_map_data/create_image_batch.py <map_image_input> <ground_truth_image_input> <output_directory>
+```
+
+If you followed the documentation to the letter, it could go like this:
+```shell script
+python ./2.BDCN/historical_map_data/create_image_batch.py dgmm_dataset/input/input_crop.jpg dgmm_dataset/ground_truth/lines_raster2_padded.png 2.BDCN/historical_map_data/
 ```
 
 ## prepare the tilling patches
@@ -51,7 +56,9 @@ The generated *.lst* files:
 *test_pari.lst*: name of the files for testing
 
 ```shell script
-python ./2.BDCN/historical_map_data/prepare_training_text.py
+cd ./2.BDCN/historical_map_data
+python prepare_training_text.py
+cd ../..
 ```
 
 # 4. Train
@@ -83,26 +90,47 @@ The EPM image is in *result_epm.jpg*.
 We should also get rid of the parts of the image outside the map area.
 
 ```shell script
-python ../1.Prepare_tiling/border_calibration.py result_epm.jpg ./dgmm_dataset/input/input_mask.png result_epm_mask.jpg
+python 1.Prepare_tiling/border_calibration.py result_epm.jpg ./dgmm_dataset/input/input_mask.png result_epm_mask.jpg
 ```
 The *result_epm_mask.jpg* contains now the final EPM image. Yay!
 
 # 8. Run watershed segmentation
 Use watershed to create segmentations on the edge probability map (EPM).
 
+## Build the watershed segmentation executable
+
+A linux build is provided but, if for some reason it doesn't work for you, you can rebuild it yourself. Here is how.
+
 ```shell script
-./3.watershed/histmapseg/build/bin/histmapseg input.png dynamic area_closing ws.tiff out.png
+cd ./3.watershed/histmapseg/
+mkdir newbuild && cd newbuild
+conan install .. --build missing -s compiler.libcxx=libstdc++11 -s compiler.cppstd=20
+cmake .. -DCMAKE_BUILD_TYPE=Release
+cmake --build . --config Release
+```
+Here you go: you now have your executable in *newbuild/bin/histmapseg*.
+
+## Run the watershed segmentation executable
+
+```shell script
+./3.watershed/histmapseg/build/bin/histmapseg <input.png> <dynamic> <area_closing> <ws.tiff> <out.png>
 ```
 
-input.png: this should be the file of EPM
+*input.png*: this should be the file of EPM
 
-dynamic: the parameter of dynamic
+*dynamic*: the parameter of dynamic
 
-area_closing: the size for closing area
+*area_closing*: the size for closing area
 
-ws.tiff: the resulting watershed tiff file
+*ws.tiff*: the resulting watershed tiff file
 
-out.png: the colorized watershed file
+*out.png*: the colorized watershed file
+
+For instance, to use one of the parameter sets from the paper:
+
+```shell script
+./3.watershed/histmapseg/build/bin/histmapseg result_epm_mask 7 400 ws.tiff out.png
+```
 
 # 9. Evaluate the results
 Evaluate the watershed segmentations with ground truth segmentations.
@@ -111,10 +139,16 @@ Evaluate the watershed segmentations with ground truth segmentations.
 python ./4.Evaluation/eval_shape_detection.py <input_gt_path> <input_contenders_path> -m <input-mask> -o <output-dir>
 ```
 
-input_gt_path: Path to the input label map (TIFF 16 bits) for ground truth.
+*input_gt_path*: Path to the input label map (TIFF 16 bits) for ground truth.
 
-input_contenders_path: Path to the contenders label map (TIFF 16 bits) for predictions.
+*input_contenders_path*: Path to the contenders label map (TIFF 16 bits) for predictions.
 
-input-mask: Path to an mask image (pixel with value 0 will be discarded in the evaluation).
+*input-mask*: Path to an mask image (pixel with value 0 will be discarded in the evaluation).
 
-output-dir: Path to the output directory where results will be stored.
+*output-dir*: Path to the output directory where results will be stored.
+
+For instance, to use our example:
+
+```shell script
+python ./4.Evaluation/eval_shape_detection.py dgmm_dataset/ground_truth/gt_seg_labels.tif ws.tiff -m dgmm_dataset/input/input_mask.png -o eval/
+```

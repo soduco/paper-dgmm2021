@@ -102,6 +102,9 @@ Use watershed to create segmentations on the edge probability map (EPM).
 A linux build is provided but, if for some reason it doesn't work for you, you can rebuild it yourself. Here is how.
 
 ```shell script
+pip install conan
+conan remote add lrde-public https://artifactory.lrde.epita.fr/artifactory/api/conan/lrde-public
+
 cd ./3.watershed/histmapseg/
 mkdir newbuild && cd newbuild
 conan install .. --build missing -s compiler.libcxx=libstdc++11 -s compiler.cppstd=20 -g cmake

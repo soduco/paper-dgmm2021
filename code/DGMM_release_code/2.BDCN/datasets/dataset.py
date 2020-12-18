@@ -22,9 +22,9 @@ def load_image_with_cache(path, cache=None, lock=None):
 
 class Data(data.Dataset):
 	def __init__(self, root, lst,
-		mean_bgr = np.array([252.84400913588036, 242.03042414898627, 207.63849301525738]),
+		mean_rgb = np.array([252.84400913588036, 242.03042414898627, 207.63849301525738]),
 		crop_size=None, rgb=True, scale=None):
-		self.mean_bgr = mean_bgr
+		self.mean_rgb = mean_rgb
 		self.root = root
 		self.lst = lst
 		self.crop_size = crop_size
@@ -66,9 +66,9 @@ class Data(data.Dataset):
 		gt = binary_dilation(gt, structure=struct1).astype(gt.dtype)
 		gt = torch.from_numpy(np.array([gt])).float()
 		img = np.array(img, dtype=np.float32)
+		img -= self.mean_rgb
 		if self.rgb:
 			img = img[:, :, ::-1] # RGB->BGR
-		img -= self.mean_bgr
 		data = []
 		if self.scale is not None:
 			for scl in self.scale:
